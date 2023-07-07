@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}">
+
+<head>
+	<title>Users Cloud</title>
+</head>
+
+<body>
+	<h2>Users Cloud Admin: User</h2>
+
+	<form method="POST" th:action="@{/admin/users}" th:object="${user}">
+		<label for="username">Username: </label>
+		<input type="text" th:field="*{username}"/>
+		<br/>
+		<label for="password">Password: </label>
+		<input type="text" th:field="*{password}"/>
+		<br/>
+		<input type="submit" value="Create user"/>
+	</form>
+</body>
+
+</html>

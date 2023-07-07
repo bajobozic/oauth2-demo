@@ -14,13 +14,15 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import dev.bajobozic.oauth2client.services.PostService;
 import dev.bajobozic.oauth2client.services.RestPostService;
+import dev.bajobozic.oauth2client.services.RestUserService;
+import dev.bajobozic.oauth2client.services.UserService;
 
 @Configuration
 public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                .requestMatchers("/").permitAll()
+                .requestMatchers("/", "/admin/users").permitAll()
                 .anyRequest().authenticated())
                 .oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/demo-client"))
                 .oauth2Client(Customizer.withDefaults());
@@ -42,5 +44,10 @@ public class SecurityConfig {
             }
         }
         return new RestPostService(accessToken);
+    }
+
+    @Bean
+    UserService userService() {
+        return new RestUserService();
     }
 }

@@ -102,7 +102,7 @@ public class SecurityConfig {
         }
 
         @Bean
-        public JWKSource<SecurityContext> jwkSource() {
+        JWKSource<SecurityContext> jwkSource() {
                 KeyPair keyPair = generateRsaKey();
                 RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
                 RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
@@ -127,12 +127,12 @@ public class SecurityConfig {
         }
 
         @Bean
-        public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
+        JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
                 return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
         }
 
         @Bean
-        public AuthorizationServerSettings authorizationServerSettings() {
+        AuthorizationServerSettings authorizationServerSettings() {
                 return AuthorizationServerSettings.builder().build();
         }
 
