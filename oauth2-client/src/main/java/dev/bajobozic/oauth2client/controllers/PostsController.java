@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import dev.bajobozic.oauth2client.models.Post;
 import dev.bajobozic.oauth2client.services.PostService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequestMapping("/admin/posts")
 @RequiredArgsConstructor
@@ -24,6 +26,7 @@ public class PostsController {
 
     @PostMapping
     String addPost(Post post) {
+        log.info(post.toString());
         postService.addPost(post);
         return "redirect:/admin/posts";
     }

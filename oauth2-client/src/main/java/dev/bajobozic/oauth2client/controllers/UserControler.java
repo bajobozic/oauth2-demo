@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import dev.bajobozic.oauth2client.models.User;
 import dev.bajobozic.oauth2client.services.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequestMapping("admin/users")
 @RequiredArgsConstructor
@@ -22,6 +24,7 @@ public class UserControler {
 
     @PostMapping
     String addUser(User user){
+        log.info(user.toString());
         userService.addUser(user);
         return "redirect:/";
     }
