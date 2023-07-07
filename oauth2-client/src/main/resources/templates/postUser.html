@@ -9,14 +9,12 @@
 <body>
 	<h2>Users Cloud Admin: User</h2>
 
-	<form method="POST" th:action="@{/admin/users}" th:object="${user}">
+	<form method="POST" th:action="@{/admin/users}" id="user">
 		<label for="username">Username: </label>
-		<input type="text" th:field="*{username}"/>
-		<br/>
-		<label for="password">Password: </label>
-		<input type="text" th:field="*{password}"/>
-		<br/>
-		<input type="submit" value="Create user"/>
+        <input type="text" name="username"/><br/>
+        <label for="password">Password: </label>
+        <input type="password" name="password"/><br/>
+		<input type="submit" value="Register user"/>
 	</form>
 </body>
 
