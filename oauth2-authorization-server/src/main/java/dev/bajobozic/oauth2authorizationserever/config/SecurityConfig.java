@@ -11,13 +11,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -59,30 +58,24 @@ public class SecurityConfig {
         @Bean
         @Order(value = Ordered.LOWEST_PRECEDENCE)
         SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-                http.authorizeHttpRequests(authorizeHttpReq -> authorizeHttpReq.anyRequest().authenticated())
+                http.csrf().disable();
+                http.cors().disable();
+                http.authorizeHttpRequests(authorizeHttpReq -> authorizeHttpReq
+                                .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                                .requestMatchers("/h2-console/**").permitAll()
+                                .anyRequest().authenticated())
                                 .formLogin(Customizer.withDefaults());
                 return http.build();
         }
 
         @Bean
         PasswordEncoder passwordEncoder() {
-                return new BCryptPasswordEncoder();
+                return NoOpPasswordEncoder.getInstance();
         }
 
         @Bean
         UserDetailsService userDetailsService() {
-                UserDetails userDetails1 = User.builder()
-                                .username("savo")
-                                .password(passwordEncoder().encode("password"))
-                                .roles("USER")
-                                .build();
-                UserDetails userDetails2 = User.builder()
-                                .username("mile")
-                                .password(passwordEncoder().encode("password"))
-                                .roles("USER")
-                                .build();
-
-                return new InMemoryUserDetailsManager(userDetails1, userDetails2);
+                return new InMemoryUserDetailsManager();
         }
 
         @Bean

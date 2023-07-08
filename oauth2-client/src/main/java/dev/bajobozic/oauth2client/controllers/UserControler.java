@@ -1,7 +1,10 @@
 package dev.bajobozic.oauth2client.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,18 +15,22 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("admin/users")
+@RequestMapping("/register")
+@CrossOrigin(origins = "/**")
 @RequiredArgsConstructor
 public class UserControler {
     private final UserService userService;
 
     @GetMapping
-    String getUser() {
-       return "postUser";
+    public String getUser(Model model) {
+        log.info("OPEN ADMIN GET");
+        User user = new User();
+        model.addAttribute("user", user);
+        return "registration";
     }
 
     @PostMapping
-    String addUser(User user){
+    public String addUser(@ModelAttribute("user") User user) {
         log.info(user.toString());
         userService.addUser(user);
         return "redirect:/";

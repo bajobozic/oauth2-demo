@@ -22,9 +22,9 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                .requestMatchers("/", "/admin/users").permitAll()
+                .requestMatchers("/", "/register").permitAll()
                 .anyRequest().authenticated())
-                .oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/demo-client"))
+                .oauth2Login(Customizer.withDefaults())
                 .oauth2Client(Customizer.withDefaults());
         return http.build();
     }
