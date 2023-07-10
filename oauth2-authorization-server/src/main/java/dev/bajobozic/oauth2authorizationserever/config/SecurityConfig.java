@@ -87,7 +87,7 @@ public class SecurityConfig {
                                 .authorizationGrantTypes(authorizationGrantTypes -> authorizationGrantTypes.addAll(
                                                 Arrays.asList(AuthorizationGrantType.AUTHORIZATION_CODE,
                                                                 AuthorizationGrantType.REFRESH_TOKEN)))
-                                .redirectUri("http://localhost:9090/login/oauth2/code/demo-client")
+                                .redirectUri("http://127.0.0.1:9090/login/oauth2/code/demo-client")
                                 .scopes(scopes -> scopes.addAll(Arrays.asList("write", "delete", "openid")))
                                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                                 .build();

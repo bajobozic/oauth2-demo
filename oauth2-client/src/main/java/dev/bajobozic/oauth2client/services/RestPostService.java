@@ -18,7 +18,7 @@ public class RestPostService implements PostService {
 
     public RestPostService(String accessToken) {
         this.restTemplate = new RestTemplate();
-        log.info("ACCESS TOKEN: "+ accessToken);
+        log.info("ACCESS TOKEN: " + accessToken);
         if (accessToken != null && !accessToken.isBlank()) {
             restTemplate.getInterceptors().add(getBearerInterceptor(accessToken));
         }

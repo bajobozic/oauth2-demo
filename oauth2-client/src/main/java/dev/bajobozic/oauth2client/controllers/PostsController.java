@@ -22,13 +22,14 @@ public class PostsController {
 
     @GetMapping
     String postsAdmin(Model model) {
+        log.info("POSTS");
         model.addAttribute("posts", postService.findAll());
-        return "postAdmin";
+        return "postsAdmin";
     }
 
     @PostMapping
     String addPost(Post post) {
-        log.info(post.toString());
+        log.info("CREATE POST: "+post.toString());
         postService.addPost(post);
         return "redirect:/admin/posts";
     }
