@@ -24,7 +24,6 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                 .requestMatchers("/", "/register").permitAll()
                 .requestMatchers("/admin/posts").hasAnyAuthority("SCOPE_write", "SCOPE_delete")
-                .requestMatchers("/api/post", "api/posts").hasAnyAuthority("SCOPE_write", "SCOPE_delete")
                 .anyRequest().authenticated())
                 .oauth2Login(
                         oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/demo-client"))
