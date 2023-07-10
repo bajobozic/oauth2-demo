@@ -23,8 +23,11 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                 .requestMatchers("/", "/register").permitAll()
+                .requestMatchers("/admin/posts").hasAnyAuthority("SCOPE_write", "SCOPE_delete")
+                .requestMatchers("/api/post", "api/posts").hasAnyAuthority("SCOPE_write", "SCOPE_delete")
                 .anyRequest().authenticated())
-                .oauth2Login(Customizer.withDefaults())
+                .oauth2Login(
+                        oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/demo-client"))
                 .oauth2Client(Customizer.withDefaults());
         return http.build();
     }
