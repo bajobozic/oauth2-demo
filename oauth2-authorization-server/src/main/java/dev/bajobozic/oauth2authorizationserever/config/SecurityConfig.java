@@ -58,8 +58,8 @@ public class SecurityConfig {
         @Bean
         @Order(value = Ordered.LOWEST_PRECEDENCE)
         SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-                http.csrf().disable();
-                http.cors().disable();
+                http.csrf(csrf -> csrf.disable());
+                http.cors(cors -> cors.disable());
                 http.authorizeHttpRequests(authorizeHttpReq -> authorizeHttpReq
                                 .requestMatchers(HttpMethod.POST, "/users").permitAll()
                                 .requestMatchers("/h2-console/**").permitAll()
