@@ -10,12 +10,15 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.RestTemplate;
 
 import dev.bajobozic.oauth2client.models.Post;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class RestPostService implements PostService {
     private RestTemplate restTemplate;
 
     public RestPostService(String accessToken) {
         this.restTemplate = new RestTemplate();
+        log.info("ACCESS TOKEN: "+ accessToken);
         if (accessToken != null && !accessToken.isBlank()) {
             restTemplate.getInterceptors().add(getBearerInterceptor(accessToken));
         }

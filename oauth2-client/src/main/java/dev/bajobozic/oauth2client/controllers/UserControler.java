@@ -22,15 +22,13 @@ public class UserControler {
     private final UserService userService;
 
     @GetMapping
-    public String getUser(Model model) {
+    public String getUser() {
         log.info("OPEN ADMIN GET");
-        User user = new User();
-        model.addAttribute("user", user);
         return "registration";
     }
 
     @PostMapping
-    public String addUser(@ModelAttribute("user") User user) {
+    public String addUser(User user) {
         log.info(user.toString());
         userService.addUser(user);
         return "redirect:/";
