@@ -10,7 +10,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(authorizeHttpReq -> authorizeHttpReq.anyRequest().authenticated())
+        httpSecurity
+                .cors(cors -> cors.disable())
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authorizeHttpReq -> authorizeHttpReq.anyRequest().authenticated())
                 .oauth2ResourceServer(oa -> oa.jwt(Customizer.withDefaults()));
         return httpSecurity.build();
     }
