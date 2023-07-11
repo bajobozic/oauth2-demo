@@ -16,7 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -70,7 +70,7 @@ public class SecurityConfig {
 
         @Bean
         PasswordEncoder passwordEncoder() {
-                return NoOpPasswordEncoder.getInstance();
+                return new BCryptPasswordEncoder();
         }
 
         @Bean
@@ -82,7 +82,7 @@ public class SecurityConfig {
         RegisteredClientRepository registeredClientRepository() {
                 RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
                                 .clientId("demo-client")
-                                .clientSecret("secret")
+                                .clientSecret(passwordEncoder().encode("secret"))
                                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                                 .authorizationGrantTypes(authorizationGrantTypes -> authorizationGrantTypes.addAll(
                                                 Arrays.asList(AuthorizationGrantType.AUTHORIZATION_CODE,
