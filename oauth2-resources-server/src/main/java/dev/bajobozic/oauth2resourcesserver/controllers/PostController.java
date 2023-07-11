@@ -3,6 +3,7 @@ package dev.bajobozic.oauth2resourcesserver.controllers;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,10 +26,10 @@ public class PostController {
     private final PostRepository postRepository;
 
     @GetMapping(value = "/posts")
-    Iterable<Post> getAll() {
+    ResponseEntity<Iterable<Post>> getAll() {
         List<Post> postList = postRepository.findAll();
         log.info("POST LIST " + postList);
-        return postList;
+        return ResponseEntity.ok(postList);
     }
 
     @PostMapping(value = "/post", consumes = "application/json")
