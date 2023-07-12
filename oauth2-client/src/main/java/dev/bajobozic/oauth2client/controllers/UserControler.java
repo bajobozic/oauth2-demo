@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/register")
+@RequestMapping(path = "/register")
 @RequiredArgsConstructor
 public class UserControler {
     private final UserService userService;

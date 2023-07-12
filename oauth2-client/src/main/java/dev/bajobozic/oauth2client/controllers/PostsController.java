@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/admin/posts")
+@RequestMapping(path = "/admin/posts")
 @RequiredArgsConstructor
 public class PostsController {
     private final PostService postService;
@@ -27,7 +27,7 @@ public class PostsController {
 
     @PostMapping
     String addPost(Post post) {
-        log.info("CREATE POST: "+post.toString());
+        log.info("CREATE POST: " + post.toString());
         postService.addPost(post);
         return "redirect:/admin/posts";
     }

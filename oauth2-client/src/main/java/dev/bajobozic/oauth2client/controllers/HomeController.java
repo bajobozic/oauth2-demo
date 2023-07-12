@@ -8,9 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping
+@RequestMapping(path = "/")
 public class HomeController {
-    @GetMapping("/")
+    @GetMapping
     String home() {
         log.info("Home page");
         return "home";

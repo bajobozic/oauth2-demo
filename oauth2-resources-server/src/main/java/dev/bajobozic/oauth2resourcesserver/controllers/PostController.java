@@ -20,19 +20,19 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/api", produces = "application/json")
+@RequestMapping(path = "/api", produces = "application/json")
 @RequiredArgsConstructor
 public class PostController {
     private final PostRepository postRepository;
 
-    @GetMapping(value = "/posts")
+    @GetMapping(path = "/posts")
     ResponseEntity<Iterable<Post>> getAll() {
         List<Post> postList = postRepository.findAll();
         log.info("POST LIST " + postList);
         return ResponseEntity.ok(postList);
     }
 
-    @PostMapping(value = "/post", consumes = "application/json")
+    @PostMapping(path = "/post", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public PostRequest postMethodName(@RequestBody PostRequest postRequest) {
         Post post = new Post();
