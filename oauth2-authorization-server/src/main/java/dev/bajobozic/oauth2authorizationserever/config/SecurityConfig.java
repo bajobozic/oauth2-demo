@@ -74,11 +74,6 @@ public class SecurityConfig {
         }
 
         @Bean
-        UserDetailsService userDetailsService() {
-                return new InMemoryUserDetailsManager();
-        }
-
-        @Bean
         RegisteredClientRepository registeredClientRepository() {
                 RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
                                 .clientId("demo-client")
