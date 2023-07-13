@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.bajobozic.oauth2resourcesserver.dto.PostRequest;
-import dev.bajobozic.oauth2resourcesserver.dto.PostRequest.Type;
 import dev.bajobozic.oauth2resourcesserver.entities.Post;
 import dev.bajobozic.oauth2resourcesserver.repositories.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,10 +34,7 @@ public class PostController {
     @PostMapping(path = "/post", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public PostRequest postMethodName(@RequestBody PostRequest postRequest) {
-        Post post = new Post();
-        post.setName(postRequest.getName());
-        Type postRequestType = postRequest.getType();
-        post.setType(Post.Type.valueOf(postRequestType.toString()));
+        Post post = new Post(postRequest.getName(), Post.Type.valueOf(postRequest.getType().toString()));
         postRepository.save(post);
         log.info("SAVED POST: " + post.toString());
         return postRequest;
