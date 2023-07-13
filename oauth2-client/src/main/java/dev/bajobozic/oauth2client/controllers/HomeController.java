@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping(path = "/")
+@RequestMapping
 public class HomeController {
     @GetMapping
     String home() {
