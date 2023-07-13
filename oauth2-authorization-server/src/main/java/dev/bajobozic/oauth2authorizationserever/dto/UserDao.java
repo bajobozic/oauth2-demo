@@ -21,11 +21,7 @@ public class UserDao {
    private final String email;
 
    public User toUser(PasswordEncoder passwordEncoder) {
-      var user = new User();
-      user.setUsername(username);
-      user.setPassword(passwordEncoder.encode(password));
-      user.setFullName(fullName);
-      user.setEmail(email);
+      var user = new User(username, passwordEncoder.encode(password), fullName, email);
       var authorities = new HashSet<Authority>() {
          {
             add(new Authority("write"));
@@ -33,7 +29,7 @@ public class UserDao {
 
          }
       };
-      user.setAuthorities(authorities);
+      user.getAuthorities().addAll(authorities);
       return user;
    }
 }
