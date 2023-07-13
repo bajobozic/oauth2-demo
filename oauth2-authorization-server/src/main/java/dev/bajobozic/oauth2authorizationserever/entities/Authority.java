@@ -1,5 +1,6 @@
 package dev.bajobozic.oauth2authorizationserever.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -18,5 +19,6 @@ public class Authority {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(unique = true)
     private final String name;
 }

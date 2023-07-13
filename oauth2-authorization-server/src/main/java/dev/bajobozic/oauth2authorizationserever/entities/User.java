@@ -3,6 +3,7 @@ package dev.bajobozic.oauth2authorizationserever.entities;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -19,8 +20,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(unique = true)
     private String username;
     private String password;
+    @Column(name = "full_name")
     private String fullName;
     private String email;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
