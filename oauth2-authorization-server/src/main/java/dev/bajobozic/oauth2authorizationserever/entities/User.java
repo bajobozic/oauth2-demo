@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
@@ -32,6 +33,7 @@ public class User {
     @Column(name = "full_name")
     private final String fullName;
     private final String email;
+    @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private final Set<Authority> authorities = new HashSet<Authority>();
 }
