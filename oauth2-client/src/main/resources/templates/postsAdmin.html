@@ -23,9 +23,15 @@
 			<label for="name" class="form-label">Name:</label>
 			<input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
 		</div>
-		<div class="mb-3 ms-3 me-3 w-25 p-3">
-			<label for="type" class="form-label">Name:</label>
-			<input type="type" class="form-control" id="type" name="type" placeholder="Enter Type">
+		<div class="ms-3 me-3 w-25 p-3">
+			<select class="form-select" aria-label="Default select example" name="type" id="type">
+				<option selected>Select type</option>
+				<option value="SPORT">SPORT</option>
+				<option value="NEWS">NEWS</option>
+				<option value="ENTERTAINMENT">ENTERTAINMENT</option>
+				<option value="SIENCE">SIENCE</option>
+				<option value="SOCIAL">SOCIAL</option>
+			</select>
 		</div>
 		<button type="submit" class="btn btn-primary mb-3 ms-4 me-3">Submit</button>
 	</form>
